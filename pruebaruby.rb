@@ -6,18 +6,27 @@ file.close
 data = alumnos.map { |notas| notas.split(', ') }
 print data
 
-# Inasistencias // no puedo hacer lo mismo dentro del menú. me dice que la
+# Inasistencias // solo funciona en el main.. no puedo hacer lo mismo dentro del menú. me dice que la
 # variable data no está definida
 inasistencia = data.collect.count { |x| x.include?('A') }
 print "En total hay #{inasistencia} inasistencia(s)"
 
-# Promedios
+# Promedios - Listo √
+b = []
 david = data[0].inject(0) { |sum, i| sum + i.to_i }
+b << david
 gonzalo = data[1].inject(0) { |sum, i| sum + i.to_i }
+b << gonzalo
 mai = data[2].inject(0) { |sum, i| sum + i.to_i }
+b << mai
 jp = data[3].inject(0) { |sum, i| sum + i.to_i }
+b << jp
+print b
 
-# Archivo nuevo con promedios
+
+# aprobados = b.map { |elem| puts "Aprobado con #{elem}" if elem / 5.0 >= 5.0 }
+# print aprobados
+# Archivo nuevo con promedios - Listo √
 file = File.open('promedios.txt', 'w')
 file.puts "David tiene promedio #{david / 5.0}"
 file.puts "Gonzalo tiene promedio #{gonzalo / 5.0}"
@@ -25,23 +34,11 @@ file.puts "Mai tiene promedio #{mai / 5.0}"
 file.puts "Jp tiene promedio #{jp / 5.0}"
 file.close
 
-# Aprobados
+# Aprobados - Como hacerlo como método??
 print "David aprueba con promedio #{david / 5.0}" if david / 5.0 >= 5
 print "Gonzalo aprueba con promedio #{gonzalo / 5.0}" if gonzalo / 5.0 >= 5
 print "Mai aprueba con promedio #{mai / 5.0}" if mai / 5.0 >= 5
 print "JP aprueba con promedio #{jp / 5.0}" if jp / 5.0 >= 5
-
-# aprobados
-# def aprobados(i)
-#   i = gets.chomp
-#   if i >= 5
-#     puts "#{i} aprueba"
-#   else
-#     print "#{i} reprueba"
-# end
-# end
-
-aprobados(5)
 
 def menu
   loop do
@@ -59,7 +56,6 @@ def menu
         file.close
         print promedios
       when 2
-        print (Data.collect.count { |x| x.include?('A') })
         # Debe contar la cantidad de inasistencias totales y mostrarlas en
         # pantalla.
       when 3
