@@ -8,17 +8,16 @@ print data
 
 #promedios
 david = data[0].inject(0) { |sum, i| sum + i.to_i}
-puts david / 5.0
 gonzalo = data[1].inject(0) { |sum, i| sum + i.to_i}
-puts gonzalo / 5.0
 mai = data[2].inject(0) { |sum, i| sum + i.to_i}
-puts mai / 5.0
 jp = data[3].inject(0) { |sum, i| sum + i.to_i}
-puts jp / 5.0
 
-
-
-
+file = File.open('promedios.txt', 'w')
+file.puts "David tiene promedio #{david / 5.0}"
+file.puts "Gonzalo tiene promedio #{gonzalo / 5.0}"
+file.puts "Mai tiene promedio #{mai / 5.0}"
+file.puts "Jp tiene promedio #{jp / 5.0}"
+file.close
 
 # f = File.new('promedios.txt', 'w')
 # promedios =
@@ -39,13 +38,10 @@ def menu
     opcion = gets.chomp.to_i
     case opcion
       when 1
-        file = File.open("promedios.txt", "w") do |file|
-        file.puts "David tiene promedio #{david}"
-        file.puts "Gonzalo tiene promedio #{gonzalo}"
-        file.puts "Mai tiene promedio #{mai}"
-        file.puts "Jp tiene promedio #{jp}"
-        end
+        file = File.open('promedios.txt', 'r')
+        promedios = file.read
         file.close
+        print promedios
         #Debe generar un archivo con el nombre de cada alumno y el
         # promedio de sus notas.
         # Se puede leer el archivo completo o ir leyendo y procesando
@@ -66,4 +62,4 @@ def menu
     end
 end
 
-#menu
+menu
